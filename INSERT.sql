@@ -17,15 +17,15 @@ INSERT INTO Performer(name, pseudonym) VALUES
 ('Gordon Matthew Thomas Sumner','Sting'),
 ('James Douglas Morrison','Jim Morrison');
 
-INSERT INTO Album(name, year) VALUES
+INSERT INTO Album(name_album, year) VALUES
 ('The Doors',1967),
 ('Brand New Day',1944),
 ('Waterloo',1974),
 ('Christmas Songs by Sinatra',1948),
-('Get a Grip',1993),
+('Get a Grip',2020),
 ('Lovedrive',1979),
 ('Elvis Presley',1956),
-('Mutter',2018),
+('Mutter',2020),
 ('Some Great Reward',2018);
 
 INSERT INTO Track(name, duration, album) VALUES

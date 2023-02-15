@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Genre_performer (
 
 CREATE TABLE IF NOT EXISTS Album (
 	album_id SERIAL PRIMARY KEY,
-	name VARCHAR(40) NOT NULL,
+	name_album VARCHAR(40) NOT NULL,
 	year INTEGER CHECK (year > 1900 AND year < 2023) NOT NULL
 );
 
