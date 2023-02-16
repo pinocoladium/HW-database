@@ -44,7 +44,9 @@ INSERT INTO Track(name, duration, album) VALUES
 ('Desert rose',286, 2),
 ('Big lie small world',306, 2),
 ('The end',706, 1),
-('My alabama song (whisky bar)',201, 1);
+('My alabama song (whisky bar)',201, 1),
+('Feuer frei!',189, 8),
+('Eat the rich',251, 5);
 
 INSERT INTO Compilation(name, year) VALUES
 ('Old school', 2017),
