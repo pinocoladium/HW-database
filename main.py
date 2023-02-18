@@ -50,7 +50,7 @@ with psycopg2.connect(database=name_base, user=name, password=pas) as conn:
                     return
             else:
                 print('The specified client already exists')
-            return 
+                return 
 
         def add_ph_number_client(cursor, email:str, ph_number):
             cursor.execute("""SELECT client_id FROM Client WHERE email = %s;""" , (email,))
