@@ -36,7 +36,13 @@ ORDER BY AVG DESC;
 SELECT name FROM Performer p
 JOIN Performer_album pa ON p.performer_id = pa.performer_id
 JOIN Album a ON a.album_id = pa.album_id
-WHERE year != 2020;
+WHERE p.name NOT IN (
+		SELECT DISTINCT p.name FROM Performer p 
+		LEFT JOIN Performer_album pa ON p.performer_id = pa.performer_id
+        JOIN Album a ON a.album_id = pa.album_id 
+		WHERE a.year = 2020
+		)
+ORDER BY p.name;
 
 SELECT c.name FROM Compilation c
 JOIN Track_compilation tc ON c.compilation_id = tc.compilation_id

@@ -3,10 +3,14 @@ import sqlalchemy as sq
 from models import *
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-DSN = "postgresql://postgres:gbnjy,fps@localhost:5432/test_ORM"
+login = input('Enter database login: ')
+password = input('Enter database password: ')
+name_base = input('Enter database name: ')
+
+DSN = f"postgresql://{login}:{password}@localhost:5432/{name_base}"
 engine = sqlalchemy.create_engine(DSN)
 
-# create_tables(engine)
+create_tables(engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -35,25 +39,22 @@ sale3 = Sale(price=390, data_sale='25.01.2023', stock_id=1, count=3)
 sale4 = Sale(price=425, data_sale='31.01.2023', stock_id=3, count=1)
 sale5 = Sale(price=490, data_sale='10.02.2023', stock_id=4, count=2)
 
-# session.add_all([pub1, pub2, pub3, book1, book1, book2, book3, book4, book5, shop1, shop2,
-# shop3, shop4, shop5, stock1, stock2, stock3, stock4, stock5, sale1, sale2, sale3, sale4, sale5])
-# session.commit()  
+session.add_all([pub1, pub2, pub3, book1, book1, book2, book3, book4, book5, shop1, shop2,
+shop3, shop4, shop5, stock1, stock2, stock3, stock4, stock5, sale1, sale2, sale3, sale4, sale5])
+session.commit() 
 
+request = iput("Enter publisher's last name: ")
 
-
-# request = iput("Enter publisher's last name: ")
-request = 'ушки'
-
-list_id = []
-list_title = []
 pub_id = session.query(Book).join(Publisher.books).filter(Publisher.name.like(f"%{request}%")).all()
 
-for c in pub_id:
-    list_id.append(c.id)
-    list_title.append(c.title)
+for a in session.query(Book).join(Publisher.books).filter(Publisher.name.like(f"%{request}%")).all():
+    for b in session.query(Stock).join(Book.stock).filter(Book.id == a.id).all():
+        for c in session.query(Shop).filter(Shop.id == b.shop_id).all():
+            for d in session.query(Sale).filter(Sale.stock_id == b.id).all():
+                print(f'{a.title} | {b.id} | {c.name} | {d.price} | {d.data_sale}')
+    
 
 
-print(list_id)
-print(list_title)
+
 
 session.close()
